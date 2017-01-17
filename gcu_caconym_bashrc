@@ -128,3 +128,6 @@ export EDITOR="/usr/bin/vim"
 
 export NVM_DIR="/home/jgf/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# added by Anaconda3 4.0.0 installer
+export PATH="/home/jgf/anaconda3/bin:$PATH"

@@ -63,4 +63,9 @@ let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 set number
 set splitbelow
-highlight YcmErrorSection guibg=#3f0000
+set splitright
+"highlight YcmErrorSection guibg=#3f0000
+
+setlocal spell spelllang=en_us
+set incsearch
+set hlsearch
