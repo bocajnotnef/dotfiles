@@ -6,7 +6,7 @@
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="agnoster"
+#ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -36,7 +36,7 @@ ZSH_THEME="agnoster"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+#DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -50,11 +50,13 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git, zsh-nvm)
 
 # User configuration
 
-  export PATH="/home/jgf/bin:/usr/lib/ccache:/home/jgf/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+fpath+=~/.zfunc
+
+  export PATH="/home/jgf/bin:/usr/lib/ccache:/home/jgf/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/~/.local/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -93,22 +95,39 @@ alias condaplz='export PATH="/home/jgf/anaconda3/bin:$PATH"'
 # source ruby gems
 alias rubyplz='export PATH="/home/jgf/.gem/ruby/2.3.0/bin:$PATH"'
 alias c='clear && git status && ls'
-
+alias jesus="source ~/.zshrc"
+alias covenant="vim ~/.zshrc"
+alias ccp="rsync -avz"
+alias xdo="xdg-open"
+alias localnodeplz='export PATH="$PATH:$(pwd)/node_modules/.bin"'
+alias nvmplz="source ~/git/zsh-nvm/zsh-nvm.plugin.zsh"
+alias beacontvplz='xrandr --output HDMI-0 --set underscan on && xrandr --output HDMI-0 --set "underscan hborder" 45 --set "underscan vborder" 25'
 # added by travis gem
 [ -f /home/jgf/.travis/travis.sh ] && source /home/jgf/.travis/travis.sh
 alias valink="nohup bash ./link_tunnel.sh"
 alias fixsteam='find ~/.steam/root/ \( -name "libgcc_s.so*" -o -name "libstdc++.so*" -o -name "libxcb.so*" -o -name "libgpg-error.so*" \) -print -delete'
+
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
 PATH=$PATH:~/.local/bin/
 
-alias jesus="source ~/.zshrc"
+export EDITOR=$(which vim)
+
+source $HOME/.cargo/env
+if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+    source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+fi
+
+# https://askubuntu.com/questions/409611/desktop-notification-when-long-running-commands-complete
+wrapper(){
+    start=$(date +%s)
+    "$@"
+    [ $(($(date +%s) - start)) -le 15 ] || notify-send "Notification" "Long\
+ running command \"$(echo $@)\" took $(($(date +%s) - start)) seconds to finish"
+}
 
 rot13 () { echo "$@" | tr 'A-Za-z' 'N-ZA-Mn-za-m' | xsel -i --clipboard }
 urot () { xsel --clipboard | tr 'A-Za-z' 'N-ZA-Mn-za-m'}
-
-
 clip() { echo "$@" | xsel -i --clipboard }
 uclip() {xsel --clipboard}
 
-export EDITOR=$(which vim)
