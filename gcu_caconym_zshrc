@@ -95,12 +95,15 @@ alias condaplz='export PATH="/home/jgf/anaconda3/bin:$PATH"'
 # source ruby gems
 alias rubyplz='export PATH="/home/jgf/.gem/ruby/2.3.0/bin:$PATH"'
 alias c='clear && git status && ls'
+
 alias jesus="source ~/.zshrc"
 alias covenant="vim ~/.zshrc"
+
 alias ccp="rsync -avz"
 alias xdo="xdg-open"
+
 alias localnodeplz='export PATH="$PATH:$(pwd)/node_modules/.bin"'
-alias nvmplz="source ~/git/zsh-nvm/zsh-nvm.plugin.zsh"
+source ~/git/zsh-nvm/zsh-nvm.plugin.zsh
 alias beacontvplz='xrandr --output HDMI-0 --set underscan on && xrandr --output HDMI-0 --set "underscan hborder" 45 --set "underscan vborder" 25'
 # added by travis gem
 [ -f /home/jgf/.travis/travis.sh ] && source /home/jgf/.travis/travis.sh
@@ -131,3 +134,7 @@ urot () { xsel --clipboard | tr 'A-Za-z' 'N-ZA-Mn-za-m'}
 clip() { echo "$@" | xsel -i --clipboard }
 uclip() {xsel --clipboard}
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
