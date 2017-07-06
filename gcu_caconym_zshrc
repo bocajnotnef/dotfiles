@@ -1,12 +1,13 @@
 # Path to your oh-my-zsh installation.
   export ZSH=/home/jgf/.oh-my-zsh
 
+DEFAULT_USER="jgf"
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
-#ZSH_THEME="agnoster"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -117,24 +118,20 @@ PATH=$PATH:~/.local/bin/
 export EDITOR=$(which vim)
 
 source $HOME/.cargo/env
-if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-    source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-fi
+
+#if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+#    source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+#fi
 
 # https://askubuntu.com/questions/409611/desktop-notification-when-long-running-commands-complete
-wrapper(){
-    start=$(date +%s)
-    "$@"
-    [ $(($(date +%s) - start)) -le 15 ] || notify-send "Notification" "Long\
- running command \"$(echo $@)\" took $(($(date +%s) - start)) seconds to finish"
-}
 
 rot13 () { echo "$@" | tr 'A-Za-z' 'N-ZA-Mn-za-m' | xsel -i --clipboard }
 urot () { xsel --clipboard | tr 'A-Za-z' 'N-ZA-Mn-za-m'}
 clip() { echo "$@" | xsel -i --clipboard }
 uclip() {xsel --clipboard}
-
+eval $(thefuck --alias)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(direnv hook zsh)"
